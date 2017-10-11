@@ -39,7 +39,84 @@ export function calcEqual(item) {
 
 export function calcEqual1() {
     console.log(JSON.stringify(this));
-  return dispatch => {
+    console.log("this is testing" + JSON.stringify(store.getState().expre));
+    console.log("this is expression" + store.getState().expre);
+    var x = store.getState().expre;
+    console.log("this is x" + x);
+    console.log("length of x "+ x.length);
+    if(x.includes("+"))
+    {
+       return dispatch => {
+    
+    return fetch(`${api}/user/doAdd`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(store.getState())
+    })
+      .then(res => { return res.json(); })
+      .then(res2 => dispatch(calcEqual(res2.expre)))
+        
+ } 
+    }
+
+    if(x.includes("-"))
+    {
+       return dispatch => {
+    
+    return fetch(`${api}/user/doSubtract`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(store.getState())
+    })
+      .then(res => { return res.json(); })
+      .then(res2 => dispatch(calcEqual(res2.expre)))
+        
+ } 
+    }
+
+    if(x.includes("*"))
+    {
+       return dispatch => {
+    
+    return fetch(`${api}/user/doMultipy`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(store.getState())
+    })
+      .then(res => { return res.json(); })
+      .then(res2 => dispatch(calcEqual(res2.expre)))
+        
+ } 
+    }
+
+    if(x.includes("/"))
+    {
+       return dispatch => {
+    
+    return fetch(`${api}/user/doDivide`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(store.getState())
+    })
+      .then(res => { return res.json(); })
+      .then(res2 => dispatch(calcEqual(res2.expre)))
+        
+ } 
+    }
+    //for(i=0, i< )
+  /*return dispatch => {
     
     return fetch(`${api}/user/doEval`, {
         method: 'POST',
@@ -52,7 +129,7 @@ export function calcEqual1() {
       .then(res => { return res.json(); })
       .then(res2 => dispatch(calcEqual(res2.expre)))
         
- }
+ }*/
 }
 
   

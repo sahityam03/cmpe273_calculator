@@ -26,11 +26,17 @@ const expression1 = (state = initialState, action) => {
                 expre : state.expre.slice(0,-1) + action.item
               }
             } else {
-               return {
-                   ...state,
-                   expre : state.expre + action.item
-                   //[action.item.menu] : {"price" : action.item.price , "qty" : Number(action.item.qty) + 1} 
-               };
+                if ((state.expre.includes("+") || state.expre.includes("-") ||
+                 state.expre.includes("*") || state.expre.includes("\/")) && (isOper)){
+                  return state;
+                }
+                else {
+                 return {
+                     ...state,
+                     expre : state.expre + action.item
+                     //[action.item.menu] : {"price" : action.item.price , "qty" : Number(action.item.qty) + 1} 
+                 };
+              }
             }
          }
 
