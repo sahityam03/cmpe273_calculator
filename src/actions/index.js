@@ -31,8 +31,7 @@ export function calcEqual(item) {
     console.log("this is in actoins and testing" + JSON.stringify(store.getState()));
     return {
         type : CALC_EQUAL,
-        item
-        
+        item 
     }
 }
 
@@ -44,92 +43,84 @@ export function calcEqual1() {
     var x = store.getState().expre;
     console.log("this is x" + x);
     console.log("length of x "+ x.length);
-    if(x.includes("+"))
-    {
-       return dispatch => {
-    
-    return fetch(`${api}/user/doAdd`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-    })
-      .then(res => { return res.json(); })
-      .then(res2 => dispatch(calcEqual(res2.expre)))
-        
- } 
-    }
+    var reg = /[0-9]+[\+\-\*\/]{1}[0-9]+/;
+    if(reg.test(x)) {
+        if(x.includes("+"))
+        {
+           return dispatch => {
+                return fetch(`${api}/user/doAdd`, {
+                    method: 'POST',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(store.getState())
+                })
+                  .then(res => { return res.json(); })
+                  .then(res2 => dispatch(calcEqual(res2.expre)))
+            } 
+        }
 
-    if(x.includes("-"))
-    {
-       return dispatch => {
-    
-    return fetch(`${api}/user/doSubtract`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-    })
-      .then(res => { return res.json(); })
-      .then(res2 => dispatch(calcEqual(res2.expre)))
+        if(x.includes("-"))
+        {
+           return dispatch => {
         
- } 
-    }
+                return fetch(`${api}/user/doSubtract`, {
+                    method: 'POST',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(store.getState())
+                })
+                  .then(res => { return res.json(); })
+                  .then(res2 => dispatch(calcEqual(res2.expre)))
+                    
+             } 
+        }
 
-    if(x.includes("*"))
-    {
-       return dispatch => {
-    
-    return fetch(`${api}/user/doMultipy`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-    })
-      .then(res => { return res.json(); })
-      .then(res2 => dispatch(calcEqual(res2.expre)))
+        if(x.includes("*"))
+        {
+           return dispatch => {
         
- } 
-    }
+                return fetch(`${api}/user/doMultipy`, {
+                    method: 'POST',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(store.getState())
+                })
+                  .then(res => { return res.json(); })
+                  .then(res2 => dispatch(calcEqual(res2.expre)))
+                    
+             } 
+        }
 
-    if(x.includes("/"))
-    {
-       return dispatch => {
-    
-    return fetch(`${api}/user/doDivide`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-    })
-      .then(res => { return res.json(); })
-      .then(res2 => dispatch(calcEqual(res2.expre)))
+        if(x.includes("/"))
+        {
+           return dispatch => {
         
- } 
+            return fetch(`${api}/user/doDivide`, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(store.getState())
+            })
+              .then(res => {return res.json()})
+              .then(res2 => dispatch(calcEqual(res2.expre)))
+                
+            } 
+        }
+    } else {
+        var item = x;
+            return {
+                type : CALC_EQUAL,
+                item 
+            }
     }
-    //for(i=0, i< )
-  /*return dispatch => {
-    
-    return fetch(`${api}/user/doEval`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-    })
-      .then(res => { return res.json(); })
-      .then(res2 => dispatch(calcEqual(res2.expre)))
-        
- }*/
 }
 
   

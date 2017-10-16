@@ -43,14 +43,17 @@ router.post('/doDivide', function (req, res, next) {
 	console.log("Iam in Divide function");
     console.log(req.body.expre);
     var reqexpr = req.body.expre;
-    if(reqexpr.includes('/'))
+    if(reqexpr.includes('/0'))
     	{
-    var result = ""+eval(reqexpr);
-    res.status(200).json({expre: result});
+    	
+    
+    res.status(401).json({expre: "cannot divide by 0. Please clear"});
     console.log(result);  
     	}
     else{
-    	console.log("this is not dvide function");
+    	var result = ""+eval(reqexpr);
+        res.status(200).json({expre: result});
+        console.log(result); 
     }
 
 });
